@@ -43,6 +43,11 @@ const shoppingList = (function(){
   
   function render() {
     // Filter item list if store prop is true by item.checked === false
+
+    // if(store.error){
+    //   $('.error').html(`<p>Error: ${store.error}</p>`)
+    // }
+
     let items = [ ...store.items ];
     if (store.hideCheckedItems) {
       items = items.filter(item => !item.checked);
@@ -67,15 +72,19 @@ const shoppingList = (function(){
       event.preventDefault();
       const newItemName = $('.js-shopping-list-entry').val();
       $('.js-shopping-list-entry').val('');
-    
       api.createItem(newItemName)
         .then(res => res.json())
         .then(newItem => {
           store.addItem(newItem);
           render();
-        });
+        })
+        // .catch(error => {
+        //   store.alertError(error.message)
+        //   render()
+        // }) 
     });
   }
+
   
   function getItemIdFromElement(item) {
     return $(item)
@@ -113,7 +122,7 @@ const shoppingList = (function(){
       store.findAndUpdate(id, updateData);
       store.setItemIsEditing(id, false);
       render();
-    });
+    })
   }
   
   function handleToggleFilterClick() {
