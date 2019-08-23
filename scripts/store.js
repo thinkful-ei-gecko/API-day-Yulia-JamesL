@@ -26,6 +26,7 @@ const store = (function(){
 
   const findAndUpdate = function(id, newData) {
     const item = this.findById(id);
+    item.checked = !item.checked;
     Object.assign(item, newData);
     api.updateItem(id, newData);
   } 
@@ -43,15 +44,15 @@ const store = (function(){
     this.searchTerm = term;
   };
 
-  // const alertError = function(errMessage){
-  //   this.error = errMessage;
-  // }
+  const alertError = function(errMessage){
+    this.error = errMessage;
+  }
 
   return {
     items: [],
     hideCheckedItems: false,
     searchTerm: '',
-    // error: '',
+    error: '',
 
     addItem,
     findById,
@@ -60,7 +61,7 @@ const store = (function(){
     toggleCheckedFilter,
     setSearchTerm,
     setItemIsEditing,
-    // alertError
+    alertError
   };
   
 }());
