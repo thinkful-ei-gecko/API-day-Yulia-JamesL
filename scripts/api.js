@@ -17,8 +17,8 @@ const api = (function(){
       },
       body: newItem
     });
+    
   };
-
   const updateItem = function(id, updateData){
     return fetch(`${BASE_URL}/items/${id}`, {
       method: 'PATCH',
@@ -26,15 +26,21 @@ const api = (function(){
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(updateData)
-    })
+    });
   };
-
+  const deleteItem = function(id) {
+    return fetch(`${BASE_URL}/items/${id}`,{
+      method: 'DELETE'
+    });
+  };
+ 
   
 
   return{
     getItems,
     createItem,
-    updateItem
+    updateItem,
+    deleteItem
   };
 })();
 
