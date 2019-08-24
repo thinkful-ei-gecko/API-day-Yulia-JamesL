@@ -1,15 +1,8 @@
 'use strict';
-/* global Item */
 // eslint-disable-next-line no-unused-vars
 const store = (function(){
   const addItem = function(item) {
     this.items.push(item);
-    // try {
-    //   Item.validateName(name);
-    //   this.items.push(Item.create(name));
-    // } catch(e) {
-    //   console.log(e.message);
-    // }
   };
 
   const findById = function(id) {
@@ -26,10 +19,8 @@ const store = (function(){
 
   const findAndUpdate = function(id, newData) {
     const item = this.findById(id);
-    item.checked = !item.checked;
     Object.assign(item, newData);
-    api.updateItem(id, newData);
-  } 
+  }; 
 
   const toggleCheckedFilter = function() {
     this.hideCheckedItems = !this.hideCheckedItems;
@@ -46,7 +37,7 @@ const store = (function(){
 
   const alertError = function(errMessage){
     this.error = errMessage;
-  }
+  };
 
   return {
     items: [],
